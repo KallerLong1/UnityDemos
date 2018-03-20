@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private float nextFire;
+    private AudioSource audioSource;
 
     public GameObject shot;
     public Transform shotSpawn;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb = GetComponent<Rigidbody>();
+        audioSource = this.GetComponent<AudioSource>();
         rb.velocity = movement * Speed;
 
         rb.position = new Vector3
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour {
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            audioSource.Play();
         }
     }
 
